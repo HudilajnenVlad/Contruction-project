@@ -22,7 +22,7 @@ public class Music implements Runnable{
         musicOut.add(tempMusic);
         while (true) {
             try {
-                File soundFile = new File("music\\"+tempMusic); //Звуковой файл
+                File soundFile = new File("music/"+tempMusic); //Звуковой файл
 
                 //Получаем AudioInputStream
                 //Вот тут могут полететь IOException и UnsupportedAudioFileException
