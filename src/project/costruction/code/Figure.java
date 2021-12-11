@@ -9,12 +9,79 @@ import static project.costruction.code.Gameplay.*;
 public class Figure {
     private ArrayList<Block> figure = new ArrayList<Block>();
     private int[][] shape = new int[4][4];
+
+    public ArrayList<project.costruction.code.Block> getFigure() {
+        return figure;
+    }
+
+    public void setFigure(ArrayList<project.costruction.code.Block> figure) {
+        this.figure = figure;
+    }
+
+    public int[][] getShape() {
+        return shape;
+    }
+
+    public void setShape(int[][] shape) {
+        this.shape = shape;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
     private int type, size, color;
     private int x = 3, y = 0; // starting left up corner
     Random random = new Random();
 
     Figure() {
         type = random.nextInt(SHAPES.length);
+        size = SHAPES[type][4][0];
+        color = SHAPES[type][4][1];
+        if (size == 4) y = -1;
+        for (int i = 0; i < size; i++)
+            System.arraycopy(SHAPES[type][i], 0, shape[i], 0, SHAPES[type][i].length);
+        createFromShape();
+    }
+    Figure (int type)
+    {
+        this.type = type;
         size = SHAPES[type][4][0];
         color = SHAPES[type][4][1];
         if (size == 4) y = -1;
@@ -108,4 +175,3 @@ public class Figure {
         for (Block block : figure) block.paint(g, color);
     }
 }
-
