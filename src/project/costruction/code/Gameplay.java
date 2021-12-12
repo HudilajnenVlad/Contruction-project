@@ -40,6 +40,7 @@ public class Gameplay extends JFrame {
     boolean isPaused = false;
     static Figure figure = new Figure();
     static boolean gameOver = false;
+    Music music;
     static final int[][] GAME_OVER_MSG = { //код для конца игры
             {0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0},
             {1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1},
@@ -54,7 +55,8 @@ public class Gameplay extends JFrame {
             {1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0},
             {0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0}};
 
-    public Gameplay() {
+    public Gameplay(Music music) {
+        this.music = music;
         setTitle(TITLE_OF_PROGRAM); //задаем название окна
         setDefaultCloseOperation(EXIT_ON_CLOSE); // задаем для закрытия
         setBounds(START_LOCATION, START_LOCATION, FIELD_WIDTH * BLOCK_SIZE + FIELD_DX, FIELD_HEIGHT * BLOCK_SIZE + FIELD_DY);
@@ -62,12 +64,19 @@ public class Gameplay extends JFrame {
         addKeyListener(new KeyAdapter() { //обработчик нажатий клавиш
             public void keyPressed(KeyEvent e) {
                 if (!gameOver && !isPaused) {
+                    if (e.getKeyCode() == 80) music.pausePlay();
+                    if (e.getKeyCode() == 78) music.nextMusic();
                     if (e.getKeyCode() == DOWN) figure.drop();
                     if (e.getKeyCode() == UP) figure.rotate();
                     if (e.getKeyCode() == LEFT || e.getKeyCode() == RIGHT) figure.move(e.getKeyCode());
                 }
-                if (e.getKeyCode() == 32)
+                if (e.getKeyCode() == 32) {
+                    if (!music.isPaused())
+                        music.pausePlay();
+                    if (music.isPaused() && isPaused)
+                        music.pausePlay();
                     isPaused = !isPaused;
+                }
                 canvas.repaint();
             }
         });

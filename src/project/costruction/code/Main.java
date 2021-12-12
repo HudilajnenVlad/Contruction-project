@@ -11,7 +11,7 @@ public class Main {
         Music music = new Music();
         Thread thread = new Thread(music);
         thread.start();
-        new Gameplay().run();
+        new Gameplay(music).run();
     }
 
 }
