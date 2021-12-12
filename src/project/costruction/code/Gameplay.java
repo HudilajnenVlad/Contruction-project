@@ -59,7 +59,6 @@ public class Gameplay extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE); // задаем для закрытия
         setBounds(START_LOCATION, START_LOCATION, FIELD_WIDTH * BLOCK_SIZE + FIELD_DX, FIELD_HEIGHT * BLOCK_SIZE + FIELD_DY);
         setResizable(false); // делаем окно неизменяемым
-        canvas.setBackground(Color.black); // задаем цвет задника
         addKeyListener(new KeyAdapter() { //обработчик нажатий клавиш
             public void keyPressed(KeyEvent e) {
                 if (!gameOver && !isPaused) {

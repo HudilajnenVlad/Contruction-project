@@ -2,13 +2,20 @@ package project.costruction.code;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Random;
 
 import static project.costruction.code.Gameplay.*;
 
 class Canvas extends JPanel { // my canvas for painting
+    private final Random random = new Random();
+    private final int numOfImg = random.nextInt(32)+1;
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+        ImageIcon img = new ImageIcon("backgroundImages/Фон "+numOfImg+".jpeg"); //full path of image
+        Image img2 = img.getImage().getScaledInstance(this.getWidth(), this.getHeight(),1);
+        ImageIcon img3 = new ImageIcon(img2);
+        g.drawImage(img3.getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
         for (int x = 0; x < FIELD_WIDTH; x++)
             for (int y = 0; y < Gameplay.FIELD_HEIGHT; y++) {
                 if (x < FIELD_WIDTH - 1 && y < FIELD_HEIGHT - 1) {
